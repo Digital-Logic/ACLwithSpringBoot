@@ -1,0 +1,25 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+        logicalFilePath="path-ignored">
+
+    <changeSet id="0005-create-admin-user" author="Larry">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="user" />
+        </preConditions>
+        <insert tableName="user">
+            <column name="email" value="admin@localhost" />
+            <column name="encoded_password" value="{bcrypt}\0442a\04412\0444NrxdaKRHEXvbwbqORKHxOh56/EpqtsZaznfFjHLZJ4jF3RIgDqr." />
+        </insert>
+    </changeSet>
+
+    <changeSet id="0005-assign-admin-role" author="Larry">
+        <insert tableName="user_roles">
+            <column name="user_id" valueComputed="(SELECT id FROM user WHERE user.email='admin@localhost')" />
+            <column name="role_id" valueComputed="(SELECT id FROM role WHERE role.name='ADMIN')" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

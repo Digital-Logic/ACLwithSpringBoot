@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+        logicalFilePath="path-ignored">
+
+    <changeSet author="Larry" id="0001-createAuthorityTable">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="authority" />
+            </not>
+        </preConditions>
+        <createTable tableName="authority">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(60)">
+                <constraints nullable="false"
+                             unique="true"
+                             uniqueConstraintName="uniqueNameConstraint" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0001-createRoleTable" author="Larry">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="role"/>
+            </not>
+        </preConditions>
+        <createTable tableName="role">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(40)">
+                <constraints nullable="false"
+                             unique="true"
+                             uniqueConstraintName="uniqueRoleNameConstraint"
+                />
+
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0001-auth-role-table-created-check" author="Lary">
+        <preConditions onFail="HALT">
+            <tableExists tableName="role"/>
+            <tableExists tableName="authority" />
+        </preConditions>
+    </changeSet>
+
+    <changeSet id="0001-createRoleAuthorityTable" author="Larry">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="role_authorities" />
+            </not>
+        </preConditions>
+        <createTable tableName="role_authorities">
+
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_role"
+                             references="role(id)"
+                             primaryKey="true"
+                             primaryKeyName="role_authority_pk"
+
+                />
+
+            </column>
+            <column name="authority_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="authority_fk"
+                             references="authority(id)"
+                             primaryKey="true"
+                             primaryKeyName="role_authority_pk"
+                />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0001-createUserTable" author="Larry">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="user">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="email" type="varchar(120)">
+                <constraints nullable="false" unique="true"
+                             uniqueConstraintName="uniqueEmailConstraint"/>
+            </column>
+            <column name="encoded_password" type="varchar(160)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="credentials_expired" type="boolean" defaultValue="false">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="account_locked" type="boolean" defaultValue="false">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="account_enabled" type="boolean" defaultValue="false">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="account_expired" type="boolean" defaultValue="false">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0001-createUserRolesTable" author="Larry">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_roles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_roles">
+            <column name="user_id" type="bigint">
+                <constraints
+                    primaryKey="true" nullable="false"
+                    primaryKeyName="user_role_pk"
+                    foreignKeyName="user_fk"
+                    references="user(id)" />
+            </column>
+
+            <column name="role_id" type="bigint">
+                <constraints
+                        primaryKey="true" nullable="false"
+                        primaryKeyName="user_role_pk"
+                        foreignKeyName="role_fk"
+                        references="role(id)" />
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

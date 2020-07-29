@@ -1,0 +1,34 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+        logicalFilePath="path-ignored">
+    <changeSet id="0008-authority-definitions" author="Larry">
+        <insert tableName="acl_sid">
+            <column name="sid" value="ADMIN_USER" />
+            <column name="principal" valueBoolean="false" />
+        </insert>
+
+        <insert tableName="acl_sid">
+            <column name="sid" value="CREATE_USER" />
+            <column name="principal" valueBoolean="false" />
+        </insert>
+
+        <insert tableName="acl_sid">
+            <column name="sid" value="DELETE_USER" />
+            <column name="principal" valueBoolean="false" />
+        </insert>
+
+        <insert tableName="acl_sid">
+            <column name="sid" value="READ_USER" />
+            <column name="principal" valueBoolean="false" />
+        </insert>
+
+        <insert tableName="acl_sid">
+            <column name="sid" value="UPDATE_USER" />
+            <column name="principal" valueBoolean="false" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

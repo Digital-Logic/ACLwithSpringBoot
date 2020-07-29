@@ -1,0 +1,99 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+        logicalFilePath="path-ignored">
+
+    <changeSet id="0006-create-acl-sid" author="Larry">
+        <createTable tableName="acl_sid">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="sid" type="varchar(240)">
+                <constraints nullable="false" />
+            </column>
+            <column name="principal" type="boolean" defaultValue="true">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0006-create-acl-class" author="Larry">
+        <createTable tableName="acl_class">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="class" type="varchar(240)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0006-create-acl-object-identity" author="Larry">
+        <createTable tableName="acl_object_identity">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="object_id_class" type="bigint">
+                <constraints foreignKeyName="fk_object_class"
+                             references="acl_class(id)"
+                             nullable="false"  />
+            </column>
+            <column name="object_id_identity" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="owner_sid" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="parent_object" type="bigint" />
+
+            <column name="entries_inheriting" type="boolean" defaultValue="false">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="0006-create-acl-entry" author="Larry">
+        <createTable tableName="acl_entry">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" />
+            </column>
+
+            <column name="acl_object_identity" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_object_identity"
+                             references="acl_object_identity(id)" />
+            </column>
+
+            <column name="ace_order" type="int" defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="sid" type="bigint">
+                <constraints
+                    nullable="false"
+                    foreignKeyName="fk_sid"
+                    references="acl_sid(id)" />
+            </column>
+
+            <column name="mask" type="int" defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="granting" type="boolean" defaultValue="true">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="audit_success" type="boolean" defaultValue="false">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="audit_failure" type="boolean" defaultValue="false">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

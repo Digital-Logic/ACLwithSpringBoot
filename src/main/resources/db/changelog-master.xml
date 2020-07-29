@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+        logicalFilePath="path-ignored">
+
+    <include file="/changelog/0001-initialize-database.xml" relativeToChangelogFile="true"/>
+    <include file="/changelog/0002-authority-data.xml" relativeToChangelogFile="true" />
+    <include file="/changelog/0003-role-data.xml" relativeToChangelogFile="true" />
+    <include file="/changelog/0004-role-authority-linking-data.xml" relativeToChangelogFile="true" />
+<!--    <include file="/changelog/0005-default-admin-user-account.xml" relativeToChangelogFile="true" />-->
+    <include file="/changelog/0006-create-acl-tables.xml" relativeToChangelogFile="true" />
+    <include file="/changelog/0007-insert-acl-class-definitions.xml" relativeToChangelogFile="true" />
+    <include file="/changelog/0008-insert-sid-definitions.xml" relativeToChangelogFile="true" />
+</databaseChangeLog>

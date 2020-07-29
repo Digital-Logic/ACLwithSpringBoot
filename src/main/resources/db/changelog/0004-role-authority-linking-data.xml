@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+        logicalFilePath="path-ignored">
+
+    <changeSet id="0004-admin-authorities-check" author="Larry">
+        <preConditions onFail="HALT">
+            <tableExists tableName="role" />
+            <tableExists tableName="authority" />
+        </preConditions>
+    </changeSet>
+
+    <changeSet id="0004-admin-authorities" author="Larry">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableIsEmpty tableName="role" />
+                <tableIsEmpty tableName="authority" />
+            </not>
+        </preConditions>
+
+        <insert tableName="role_authorities">
+            <column name="role_id" valueComputed="(SELECT id FROM role WHERE role.name = 'ADMIN')" />
+            <column name="authority_id" valueComputed="(SELECT id FROM authority WHERE authority.name = 'ADMIN_USER')" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

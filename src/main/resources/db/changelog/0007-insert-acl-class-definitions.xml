@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+        logicalFilePath="path-ignored">
+
+    <changeSet id="0007-authority-class-id" author="Larry">
+        <insert tableName="acl_class">
+            <column name="class" value="net.digitallogic.AclRestUser.persistence.entity.AuthorityEntity"/>
+        </insert>
+    </changeSet>
+    <changeSet id="0007-user-class-id" author="Larry">
+        <insert tableName="acl_class">
+            <column name="class" value="net.digitallogic.AclRestUser.persistence.entity.UserEntity" />
+        </insert>
+    </changeSet>
+    <changeSet id="0007-role-class-id" author="Larry">
+        <insert tableName="acl_class">
+            <column name="class" value="net.digitallogic.AclRestUser.persistence.entity.RoleEntity" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

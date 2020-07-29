@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>da8c0969-6666-485c-8e01-fcaa0c3d0200.SCHEMA:aclRestUser</OriginalElement>
+  <nodes>
+    <node x="279.0" y="652.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.role</node>
+    <node x="194.5" y="0.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_class</node>
+    <node x="50.5" y="318.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_entry</node>
+    <node x="452.0" y="652.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.authority</node>
+    <node x="0.0" y="147.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_sid</node>
+    <node x="162.0" y="135.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_object_identity</node>
+    <node x="650.0" y="592.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.DATABASECHANGELOGLOCK</node>
+    <node x="0.0" y="592.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.user</node>
+    <node x="145.87500000000003" y="847.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.user_roles</node>
+    <node x="365.125" y="847.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.role_authorities</node>
+    <node x="429.0" y="0.0">da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.DATABASECHANGELOG</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_entry" target="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_object_identity">
+      <point x="60.75" y="-114.5" />
+      <point x="232.75" y="293.0" />
+      <point x="273.0" y="293.0" />
+      <point x="0.0" y="66.5" />
+    </edge>
+    <edge source="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_entry" target="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_sid">
+      <point x="-60.75" y="-114.5" />
+      <point x="111.25" y="293.0" />
+      <point x="71.0" y="293.0" />
+      <point x="0.0" y="54.5" />
+    </edge>
+    <edge source="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.role_authorities" target="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.authority">
+      <point x="48.0" y="-42.0" />
+      <point x="509.125" y="822.0" />
+      <point x="528.5" y="822.0" />
+      <point x="0.0" y="42.5" />
+    </edge>
+    <edge source="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.user_roles" target="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.role">
+      <point x="38.75" y="-42.0" />
+      <point x="262.125" y="822.0" />
+      <point x="317.25" y="822.0" />
+      <point x="-38.25" y="42.5" />
+    </edge>
+    <edge source="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.role_authorities" target="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.role">
+      <point x="-48.0" y="-42.0" />
+      <point x="413.125" y="822.0" />
+      <point x="393.75000000000006" y="822.0" />
+      <point x="38.25000000000003" y="42.5" />
+    </edge>
+    <edge source="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.user_roles" target="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.user">
+      <point x="-38.75" y="-42.0" />
+      <point x="184.62500000000003" y="822.0" />
+      <point x="129.5" y="822.0" />
+      <point x="0.0" y="102.5" />
+    </edge>
+    <edge source="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_object_identity" target="da8c0969-6666-485c-8e01-fcaa0c3d0200.TABLE:aclRestUser.acl_class">
+      <point x="0.0" y="-66.5" />
+      <point x="0.0" y="42.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.3000000000000003" x="565.8945723216824" y="283.92307692307685" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
