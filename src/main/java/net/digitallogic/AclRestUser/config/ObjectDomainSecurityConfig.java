@@ -46,7 +46,6 @@ public class ObjectDomainSecurityConfig extends GlobalMethodSecurityConfiguratio
     }
 
 
-
     @Bean
     public JdbcMutableAclService aclService() {
         JdbcMutableAclService aclService = new JdbcMutableAclService(
@@ -57,6 +56,7 @@ public class ObjectDomainSecurityConfig extends GlobalMethodSecurityConfiguratio
             aclService.setClassIdentityQuery("SELECT @@IDENTITY");
             aclService.setSidIdentityQuery("SELECT @@IDENTITY");
         }
+
         return aclService;
     }
 

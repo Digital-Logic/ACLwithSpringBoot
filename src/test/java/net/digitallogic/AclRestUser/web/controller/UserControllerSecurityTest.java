@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -27,26 +28,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Transactional
 @Sql(value = "classpath:repository/insertUserJoeDirt.sql")
 @ActiveProfiles({"H2", "TEST"})
-//@Import(UserControllerSecurityTest.UserTestConfig.class)
 public class UserControllerSecurityTest {
-
-//    @TestConfiguration
-//    public static class UserTestConfig {
-//
-//        @Bean
-//        public UserDetailsService userDetailsService() {
-//            List<UserEntity> users = UserFixtures.getUsers(2);
-//            users.get(1).addRole(
-//                    RoleFixtures.getRole(Roles.ADMIN.name)
-//            );
-//            users.get(2).addRole(
-//                    RoleFixtures.getRole(Roles.USER.name)
-//            );
-//
-//            List<UserDetails> usersDetails =(List<UserDetails>)(List<?>) users;
-//            return new InMemoryUserDetailsManager(usersDetails);
-//        }
-//    }
 
     @Autowired
     private UserController userController;
@@ -86,7 +68,8 @@ public class UserControllerSecurityTest {
     }
 
     @Test
-    @WithMockUser(value = "joe@dirt.com")
+    @WithUserDetails(value = "joe@dirt.com",
+            userDetailsServiceBeanName = "userServiceImpl")
     public void getUserTest() {
         Optional<UserEntity> userOptional = userRepository.findByEmailIgnoreCase("joe@dirt.com");
         assertThat(userOptional).isNotEmpty();
@@ -100,7 +83,7 @@ public class UserControllerSecurityTest {
     }
 
     @Test
-    @WithMockUser(value = "steve@yahoo.com")
+    @WithUserDetails(value = "steve@yahoo.com")
     public void getAnotherUserTest() {
         Optional<UserEntity> userOptional = userRepository.findByEmailIgnoreCase("joe@dirt.com");
         assertThat(userOptional).isNotEmpty();

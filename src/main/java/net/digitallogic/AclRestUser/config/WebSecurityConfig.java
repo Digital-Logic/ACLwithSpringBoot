@@ -6,18 +6,17 @@ import net.digitallogic.AclRestUser.security.AccessToken;
 import net.digitallogic.AclRestUser.security.AuthTokenProcessingFilter;
 import net.digitallogic.AclRestUser.security.JwtTokenGenerator;
 import net.digitallogic.AclRestUser.security.UserLoginFilter;
+import net.digitallogic.AclRestUser.services.UserService;
 import net.digitallogic.AclRestUser.web.Routes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
@@ -27,7 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final long accessTokenExpires;
     private final String iss;
     private final UserRepository userRepository;
-    private final UserDetailsService userDetailsService;
     private final UserMapper userMapper;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
@@ -40,8 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                              UserRepository userRepository,
                              UserMapper userMapper,
                              AuthenticationManagerBuilder authenticationManagerBuilder,
-                             Environment environment,
-                             UserDetailsService userDetailsService) throws Exception {
+                             UserService userService) throws Exception {
 
         this.accessTokenSecret = accessTokenSecret;
         this.accessTokenExpires = accessTokenExpires;
@@ -49,9 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
-        this.userDetailsService = userDetailsService;
 
-        authenticationManagerBuilder.userDetailsService(userDetailsService);
+        authenticationManagerBuilder.userDetailsService(userService);
     }
 
 
